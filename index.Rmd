@@ -1,0 +1,57 @@
+---
+title       : Hierarchical clustering
+subtitle    : Using the 'mtcars' data set
+author      : Stephan
+job         : Coursera student
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+widgets     : []            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+---
+
+## Hierarchical clustering
+
+A short description:  
+
+`In data mining, hierarchical clustering is a method of cluster analysis which seeks to build a hierarchy of clusters`   
+`Source: Wikipedia`
+
+--- .class #id 
+
+## The data
+
+We use the `mtcars` data set, as provided by `R`.  
+The data was extracted from the 1974 Motor Trend US magazine, and comprises fuel consumption and 10 aspects of automobile design and performance for 32 automobiles (1973-74 models).
+
+An extract:
+```{r head, echo=FALSE, warning=FALSE, results='asis'}
+library(xtable)
+print(xtable(head(mtcars)), type="html")
+```
+
+
+---
+
+## The result
+
+Performing hierarchical clustering on the sample data identifies basically four `clusters of car types`:
+
+```{r hc, echo=FALSE, fig.width=14}
+clusters <- hclust(dist(scale(mtcars)), method="complete")
+cut <- cutree(clusters, 4)
+plot(clusters, hang=-1, main="Hierarchical clustering of cars", sub="1973-74 model year", xlab="Cars", ylab="")
+rect.hclust(clusters,4)
+```
+
+
+--- 
+
+## The App
+
+The App  
+               [Hierarchical clustering on mtcars data set](https://stephan.shinyapps.io/App2/)  
+allows for flexible choice of methods and a flexible choice of clusters.
+
+Enjoy!
